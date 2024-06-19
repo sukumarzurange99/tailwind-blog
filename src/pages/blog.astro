@@ -1,13 +1,18 @@
 ---
-import '../styles/global.css';
+//import '../styles/global.css';
 
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-const pageTitle = "blog Me";
+//import Navigation from '../components/Navigation.astro';
+//import Footer from '../components/Footer.astro';
 
+
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BlogPost from '../components/BlogPost.astro';
+
+const allPosts = await Astro.glob('./posts/*.md');
+const pageTitle = "My Astro Learning Blog";
 ---
 
-<html lang="en">
+<!-- <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -17,12 +22,14 @@ const pageTitle = "blog Me";
 	</head>
 	<body>
 
-        <!--
-		this code has been replaces with navigatiom
+        
+		//this code has been replaces with navigatiom
 		 <a href="/">Home</a>
         <a href="/about/">About</a>
         <a href="/">blog</a> -->
-		<Navigation />
+
+
+		<!-- <Navigation />
 
 		<h1>{pageTitle}</h1>
         <h1>my astro learning blog</h1>
@@ -36,3 +43,14 @@ const pageTitle = "blog Me";
 
 	</body>
 </html>
+-->
+
+<BaseLayout pageTitle={pageTitle}>
+	<p>This is where I will post about my journey learning Astro.</p>
+	<ul>
+		<!-- {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)} -->
+
+		{allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+
+	</ul>
+  </BaseLayout>
